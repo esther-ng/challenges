@@ -31,16 +31,16 @@
 
 
  # There are N shapes made up of 0s in the image. They are not necessarily rectangles -- they are odd shapes (“islands”). Find them.
-# image = [
-#   [1, 0, 1, 1, 1, 1, 1],
-#   [1, 0, 0, 1, 0, 1, 1],
-#   [1, 1, 1, 0, 0, 0, 1],
-#   [1, 0, 1, 1, 0, 1, 1],
-#   [1, 0, 1, 1, 1, 1, 1],
-#   [1, 0, 0, 0, 0, 1, 1],
-#   [1, 1, 1, 0, 0, 1, 1],
-#   [1, 1, 1, 1, 1, 1, 1],
-# ];
+image = [
+  [1, 0, 1, 1, 1, 1, 1],
+  [1, 0, 0, 1, 0, 1, 1],
+  [1, 1, 1, 0, 0, 0, 1],
+  [1, 0, 1, 1, 0, 1, 1],
+  [1, 0, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 1, 1],
+  [1, 1, 1, 0, 0, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1],
+]
 
 
 def coord(image)
@@ -48,7 +48,7 @@ def coord(image)
   image.each_with_index do |row, i|
     row.each_with_index do |pixel, j|
       shape = {}
-      if (pixel == 0) && (image[i - 1][j] == 1) && (image[i][j-1] == 1)
+      if (pixel == 0) && (i == 0 || image[i - 1][j] == 1) && (j == 0 || image[i][j-1] == 1)
         shape[[i, j]] = true
         shape[find_end([i, j], image)] = true
         coordinates << shape
