@@ -57,6 +57,14 @@ class Tree
     end
   end
 
+  def height(root)
+    if root.nil?
+        return 0
+    else
+        [height(root.left), height(root.right)].max + 1
+    end
+  end
+
   def swap_children(level, root)
     return if root.nil?
     if level == 1
@@ -81,12 +89,16 @@ nodes.times do
 end
 
 tree.insert(ui)
-puts tree.in_order(tree.root)
+# puts tree.in_order(tree.root)
 
 levels = gets.chomp.to_i
 
 levels.times do
   level = gets.chomp.to_i
-  tree.swap_children(level, tree.root)
+  height = tree.height(tree.root)
+  until level >= height
+    tree.swap_children(level, tree.root)
+    level += 2
+  end
   puts tree.in_order(tree.root)
 end
